@@ -11,18 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberRepositoryImplTest {
 
-    MemberReposiotry memberReposiotry = new MemberRepositoryImpl();
+    MemberRepository memberRepository = new MemberRepositoryImpl();
 
     @AfterEach
     public void afterEach(){
-        memberReposiotry.clearStore();
+        memberRepository.clearStore();
     }
 
     @Test
     void saveTest() {
         Member member = getMember("spring");
 
-        Member findMember = memberReposiotry.findById(member.getId()).get();
+        Member findMember = memberRepository.findById(member.getId()).get();
 
         assertThat(findMember.getName()).isEqualTo("spring");
     }
@@ -33,7 +33,7 @@ class MemberRepositoryImplTest {
 
         Member member2 = getMember("spring2");
 
-        Member findMember = memberReposiotry.findByName("spring1").get();
+        Member findMember = memberRepository.findByName("spring1").get();
         assertThat(findMember).isEqualTo(member);
     }
 
@@ -41,7 +41,7 @@ class MemberRepositoryImplTest {
         Member member = new Member();
         member.setName(spring1);
 
-        memberReposiotry.save(member);
+        memberRepository.save(member);
         return member;
     }
 
@@ -49,7 +49,7 @@ class MemberRepositoryImplTest {
     void findAllTest() {
         craeteMembers();
 
-        List<Member> all = memberReposiotry.findAll();
+        List<Member> all = memberRepository.findAll();
         assertThat(all.size()).isEqualTo(2);
     }
 
